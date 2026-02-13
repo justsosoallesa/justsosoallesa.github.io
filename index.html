@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>JY & WY</title>
+  <!-- 高贵紫调 + 优雅字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Sacramento&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- 重置 & 紫色基调 (完整保留第一次的优雅) ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #1a0b1f;
+      color: #fffaf5;
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ----- 背景 MV 视频 (紫色滤镜) ----- */
+    #bg-mv {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+      opacity: 1;
+      pointer-events: none;
+    }
+
+    .video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(75, 20, 90, 0.45) 0%, rgba(45, 15, 65, 0.75) 100%);
+      z-index: -1;
+      backdrop-filter: blur(2px);
+      pointer-events: none;
+    }
+
+    /* ----- 飘浮爱心花瓣 (紫色浪漫) ----- */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(218, 180, 255, 0.6);
+      font-size: 1.4rem;
+      animation: floatUp 18s linear infinite;
+      user-select: none;
+      text-shadow: 0 0 12px rgba(170, 120, 255, 0.7);
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.6) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.9; }
+      100% { transform: translateY(-20vh) scale(1.2) rotate(360deg); opacity: 0; }
+    }
+
+    /* ----- 主卡片 (毛玻璃贵族紫) ----- */
+    .content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .glass-card {
+      max-width: 820px;
+      width: 100%;
+      background: rgba(48, 25, 60, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(230, 200, 255, 0.25);
+      border-radius: 48px;
+      padding: 48px 42px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(200, 150, 255, 0.15) inset, 0 0 30px rgba(160, 100, 255, 0.3);
+      color: #fff6f0;
+      text-align: center; /* 整体居中，内部块左对齐时自行重置 */
+    }
+
+    /* ----- 标题区 (按用户要求替换) ----- */
+    .glass-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.6rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+      color: #f3e5ff;
+      text-shadow: 0 0 20px #b77dd9, 0 2px 10px #4a1a6c;
+    }
+
+    .subhead {
+      font-size: 1.25rem;
+      font-weight: 350;
+      color: #e4d0ff;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(200, 160, 255, 0.5);
+      border-top: 1px solid rgba(200, 160, 255, 0.5);
+      padding: 14px 0;
+      font-style: italic;
+      letter-spacing: 3px;
+      word-spacing: 6px;
+      backdrop-filter: blur(4px);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ----- 心跳分隔线 (保留第一次) ----- */
+    .heart-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+      color: #e4b1ff;
+      font-size: 1.6rem;
+    }
+
+    .heart-divider i {
+      text-shadow: 0 0 20px #c271ff;
+      animation: pulse 2.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 35px #e5b2ff; }
+      100% { transform: scale(1); opacity: 0.9; }
+    }
+
+    /* ----- 相识天数盒子 (改为35天 / 我们相识) ----- */
+    .days-box {
+      background: linear-gradient(145deg, rgba(110, 45, 130, 0.5), rgba(60, 20, 80, 0.6));
+      border-radius: 80px;
+      padding: 16px 24px;
+      margin: 25px 0 18px;
+      border: 1px solid rgba(255, 215, 245, 0.7);
+      box-shadow: 0 8px 25px rgba(80, 20, 120, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .days-number {
+      font-size: 3.1rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: #ffebff;
+      text-shadow: 0 0 20px #c67bff, 0 0 5px #a748cc;
+      line-height: 1;
+    }
+
+    .days-text {
+      font-size: 1.2rem;
+      letter-spacing: 4px;
+      color: #f1d4ff;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    /* ----- 三美德 (保留第一次的紫色徽章) ----- */
+    .virtues {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 35px 0 20px;
+      gap: 10px;
+    }
+
+    .virtue-item {
+      flex: 1 1 150px;
+      background: rgba(200, 150, 255, 0.08);
+      padding: 18px 6px;
+      border-radius: 30px;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(240, 200, 255, 0.25);
+      transition: transform 0.3s ease, background 0.3s;
+    }
+
+    .virtue-item:hover {
+      transform: translateY(-6px);
+      background: rgba(170, 120, 240, 0.2);
+      border-color: rgba(255, 220, 255, 0.7);
+      box-shadow: 0 8px 18px rgba(150, 70, 200, 0.3);
+    }
+
+    .virtue-item i {
+      font-size: 2.2rem;
+      color: #e6c3ff;
+      margin-bottom: 12px;
+      text-shadow: 0 0 15px #b266ff;
+    }
+
+    .virtue-item span {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #ffe7fd;
+      letter-spacing: 2px;
+    }
+
+    /* ----- 诗句区域 (已替换为用户指定句子) ----- */
+    .poem {
+      font-family: 'Sacramento', cursive;
+      font-size: 2rem;
+      margin: 30px 0 30px;
+      color: #fde5ff;
+      text-shadow: 0 0 10px #c271ff;
+      line-height: 1.5;
+      border-left: 3px solid rgba(255, 190, 230, 0.8);
+      border-right: 3px solid rgba(255, 190, 230, 0.6);
+      padding: 16px 5px;
+      background: rgba(55, 20, 70, 0.2);
+    }
+
+    /* ===== 新增模块：打字机 (下划线光标) + 竖形时间轴照片墙 ===== */
+    /* ---------- 打字机样式 (紫色光标下划线) ---------- */
+    .typewriter-section {
+      margin: 30px 0 25px;
+      background: rgba(170, 120, 220, 0.1);
+      padding: 22px 18px;
+      border-radius: 60px;
+      border: 1px dashed rgba(255, 200, 255, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .typewriter {
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      flex-wrap: wrap;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #ffeaf9;
+      text-shadow: 0 0 8px #c271ff;
+      letter-spacing: 2px;
+    }
+
+    .typewriter-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-right: 6px;
+      text-align: left;
+    }
+    /* 光标：伪元素实现，永远紧跟在文字末尾 */
+    .typewriter-text::after {
+      content: '';
+      display: inline-block;
+      width: 0.7em;
+      height: 1.3rem;
+      background: linear-gradient(90deg, #f0c0ff, #d9a3ff, #b77dd9) bottom / 100% 2px no-repeat;
+      box-shadow: 0 0 12px #e6b0ff, 0 0 20px #c271ff;
+      animation: blink-smooth 1.2s ease-in-out infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* ---------- 竖形时间轴 · 紫色照片墙 (完全保留第二次设计的样式) ---------- */
+    .timeline-vertical {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0 30px;
+      position: relative;
+      width: 100%;
+      text-align: left;  /* 时间轴内部左对齐，但卡片整体居中 */
+    }
+
+    /* 垂直线条 (紫晶中线) */
+    .timeline-vertical::before {
+      content: '';
+      position: absolute;
+      left: 45px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: linear-gradient(to bottom, #d9a3ff, #aa6dc9, #d9a3ff);
+      box-shadow: 0 0 18px #c67bff;
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .timeline-left {
+      flex-shrink: 0;
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .photo-frame {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, rgba(175, 100, 220, 0.5), rgba(110, 45, 130, 0.7));
+      border: 2.5px solid rgba(255, 210, 255, 0.85);
+      box-shadow: 0 0 25px rgba(190, 100, 255, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+    }
+
+    .photo-frame i {
+      font-size: 2.2rem;
+      color: #fff1ff;
+      text-shadow: 0 0 20px #ebc8ff;
+      filter: drop-shadow(0 0 8px #b77dd9);
+    }
+
+    .timeline-right {
+      flex: 1;
+      background: rgba(180, 130, 220, 0.08);
+      margin-left: 10px;
+      padding: 14px 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(230, 180, 255, 0.4);
+      backdrop-filter: blur(6px);
+      transition: 0.3s;
+    }
+
+    .timeline-right:hover {
+      background: rgba(190, 140, 240, 0.18);
+      border-color: rgba(255, 200, 255, 0.8);
+      box-shadow: 0 6px 16px rgba(150, 70, 200, 0.25);
+    }
+
+    .event-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffe2ff;
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .event-desc {
+      font-size: 0.98rem;
+      color: #f3d2ff;
+      font-weight: 300;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+
+    .event-desc i {
+      color: #ffc0ff;
+      margin-right: 6px;
+    }
+
+    /* 时间轴小圆点装饰 */
+    .timeline-left::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 12px;
+      background: radial-gradient(#ffb3ff, #ac5fc0);
+      border: 2px solid rgba(255, 215, 255, 0.9);
+      border-radius: 50%;
+      box-shadow: 0 0 18px #eaadff;
+      z-index: 3;
+    }
+
+    .timeline-item:last-child .timeline-left::after {
+      display: none;
+    }
+/* ===== 新增：自制视频播放器（紫色水晶质感） ===== */
+    .custom-video-section {
+      margin: 30px 0 25px;
+      padding: 20px;
+      background: rgba(48, 25, 60, 0.5);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid rgba(230, 180, 255, 0.5);
+      border-radius: 36px;
+      box-shadow: 0 0 30px rgba(160, 80, 200, 0.4);
+    }
+
+    .custom-video-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #f3d2ff;
+      text-shadow: 0 0 10px #b77dd9;
+    }
+
+    .custom-video-title i {
+      font-size: 1.8rem;
+      color: #ffb3ff;
+      filter: drop-shadow(0 0 8px #c86eff);
+    }
+
+    /* 视频播放器样式 */
+    .custom-video-player {
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid rgba(255, 200, 255, 0.7);
+      box-shadow: 0 0 30px rgba(190, 100, 255, 0.6);
+    }
+
+    .custom-video-player video {
+      width: 100%;
+      height: 400px;
+      display: block;
+      background: #1a0b1f;
+    }
+
+    /* 原生控件调色（部分浏览器支持） */
+    .custom-video-player video::-webkit-media-controls-panel {
+      /* background: linear-gradient(145deg, rgba(110, 45, 130, 0.8), rgba(60, 20, 80, 0.9)); */
+      border-radius: 0 0 24px 24px;
+    }
+
+    .custom-video-player video::-webkit-media-controls-play-button,
+    .custom-video-player video::-webkit-media-controls-timeline,
+    .custom-video-player video::-webkit-media-controls-volume-slider {
+      filter: drop-shadow(0 0 6px #c67bff);
+    }
+    /* ----- MV 播放器 & 签名 (完全保留第一次) ----- */
+    .mv-player-area {
+      background: rgba(35, 12, 48, 0.55);
+      border-radius: 54px;
+      padding: 18px 24px;
+      margin: 35px 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      border: 1px solid rgba(255, 150, 255, 0.5);
+      box-shadow: 0 0 30px rgba(130, 60, 200, 0.4);
+      backdrop-filter: blur(12px);
+    }
+
+    .mv-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.1rem;
+    }
+
+    .mv-info i {
+      font-size: 2rem;
+      color: #ffb3ff;
+      filter: drop-shadow(0 0 10px #c86eff);
+    }
+
+    .mv-label {
+      background: rgba(210, 130, 255, 0.25);
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #ffeefc;
+      border: 1px solid rgba(255, 200, 255, 0.7);
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+    }
+
+    .music-btn {
+      background: radial-gradient(circle at 30% 20%, #ad6aca, #5e2a7c);
+      border: none;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 5px 0 #371a47, 0 10px 30px #a156b0;
+      border: 1px solid rgba(255, 215, 255, 0.7);
+    }
+
+    .music-btn i {
+      font-size: 1.5rem;
+      color: #ffe9ff;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.04);
+      background: radial-gradient(circle at 30% 20%, #b97ad6, #6f3791);
+      box-shadow: 0 8px 0 #4d255e, 0 15px 40px #b572d6;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-family: 'Sacramento', cursive;
+      font-size: 2.2rem;
+      color: #f5daff;
+      text-shadow: 0 0 20px #c67bff;
+      border-top: 1px dashed rgba(255, 200, 255, 0.6);
+      padding-top: 28px;
+    }
+
+    .date-stamp {
+      font-size: 0.95rem;
+      letter-spacing: 4px;
+      color: #e2b1ff;
+      font-weight: 300;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+    /* ========== 弹窗播放器 Modal ========== */
+    .music-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .music-modal.hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .modal-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(26, 11, 31, 0.8);
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-content {
+      position: relative;
+      width: 90%;
+      max-width: 440px;
+      background: rgba(58, 28, 78, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 2px solid rgba(230, 180, 255, 0.6);
+      border-radius: 48px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 200, 255, 0.2) inset, 0 0 50px rgba(170, 90, 220, 0.6);
+      text-align: center;
+      animation: modalFloatIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFloatIn {
+      0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-icon {
+      font-size: 3.6rem;
+      color: #ffc9ff;
+      text-shadow: 0 0 30px #c67bff;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f7e5ff;
+      text-shadow: 0 0 15px #b77dd9;
+      margin-bottom: 16px;
+    }
+
+    .modal-text {
+      font-size: 1.1rem;
+      color: #e9d0ff;
+      margin-bottom: 32px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .modal-btn {
+      background: radial-gradient(circle at 30% 20%, #b97ad6, #6a2f8a);
+      border: none;
+      color: white;
+      padding: 16px 32px;
+      border-radius: 60px;
+      font-size: 1.3rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 8px 0 #3e1d4e, 0 15px 40px #a156b0;
+      border: 1px solid rgba(255, 215, 255, 0.8);
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .modal-btn i {
+      font-size: 1.5rem;
+      color: #ffe9ff;
+    }
+
+    .modal-btn:hover {
+      transform: scale(1.05);
+      background: radial-gradient(circle at 30% 20%, #c78be0, #7f3d9b);
+      box-shadow: 0 10px 0 #562b66, 0 20px 50px #c271ff;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-size: 1.8rem;
+      color: rgba(255, 200, 255, 0.7);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .modal-close:hover {
+      color: #ffd6ff;
+      transform: scale(1.2);
+      text-shadow: 0 0 20px #ffaaff;
+    }
+    /* ----- 响应式调整 (保留时间轴在小屏的优雅降级) ----- */
+    @media (max-width: 600px) {
+      .glass-card {
+        padding: 32px 22px;
+      }
+      .glass-card h1 {
+        font-size: 2.7rem;
+      }
+      .timeline-vertical::before {
+        left: 38px;
+      }
+      .photo-frame {
+        width: 60px;
+        height: 60px;
+      }
+      .timeline-left {
+        width: 75px;
+      }
+      .days-number {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .timeline-vertical::before {
+        display: none;
+      }
+      .timeline-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .timeline-left {
+        margin-bottom: 8px;
+      }
+      .timeline-right {
+        margin-left: 0;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景MV视频 (紫色花海) -->
+  <video id="bg-mv" autoplay muted loop playsinline>
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+    <source src="https://cdn.pixabay.com/video/2022/06/17/121250-722784609_large.mp4" type="video/mp4">
+    您的浏览器不支持背景MV视频。
+  </video>
+  <div class="video-overlay"></div>
+
+  <!-- 漂浮紫色爱心 -->
+  <div class="floating-hearts" id="heartContainer"></div>
+<!-- ========== 弹窗播放器 Modal ========== -->
+  <div id="musicModal" class="music-modal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      <i class="fas fa-times modal-close" id="modalCloseBtn"></i>
+      <div class="modal-icon">
+        <i class="fas fa-heart"></i>
+      </div>
+      <div class="modal-title">为 JY & WY 开启旋律</div>
+      <div class="modal-text">
+        点击下方按钮 💜 这是属于我们的乐章。
+      </div>
+      <button id="modalPlayBtn" class="modal-btn">
+        <i class="fas fa-play"></i> 播放旋律
+      </button>
+    </div>
+  </div>
+
+  <!-- 主卡片 —— 严格遵循第一次顺序 + 中间插入打字机&时间轴 -->
+  <div class="content">
+    <div class="glass-card">
+
+      <!-- 1. 标题 JY & WY -->
+      <h1>JY & WY</h1>
+
+      <!-- 2. 副标题 愿无岁月可白首，且以深情共白头 -->
+      <div class="subhead">
+        <i class="fas fa-crown" style="color: #e4b1ff;"></i> 愿无岁月可回首，且以深情共白头 <i class="fas fa-crown" style="color: #e4b1ff;"></i>
+      </div>
+
+      <!-- 3. 心跳分隔线 -->
+      <div class="heart-divider">
+        <i class="fas fa-heart"></i>
+        <i class="fas fa-heart" style="color: #f5cbff; font-size: 2rem;"></i>
+        <i class="fas fa-heart"></i>
+      </div>
+
+      <!-- 4. 相识天数盒子（固定35天/我们相识） -->
+      <div class="days-box">
+        <span class="days-text">我们相识 
+        <span class="days-number">35</span> 天</span>
+      </div>
+<!-- ===== 新增中间板块：打字机 + 竖形时间轴照片墙 ===== -->
+      <!-- 打字机模块（下划线光标，文案先随便生成，可后期替换） -->
+      <div class="typewriter-section">
+        <div class="typewriter">
+          <span class="typewriter-text" id="typingText">
+          </span>
+        </div>
+      </div>
+
+      <!-- 竖形时间轴 · 照片墙（样式完全保留第二次设计） -->
+      <div class="timeline-vertical">
+        <!-- 时间轴条目 1 -->
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fas fa-camera-retro"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">✨ 初识</div>
+            <div class="event-desc">
+              <i class="fas fa-heart"></i> 2026.01.11  在1.11日遇到了我的11。
+            </div>
+          </div>
+        </div>
+        <!-- 时间轴条目 2 -->
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fas fa-coffee"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">🍰 第一次共进晚餐</div>
+            <div class="event-desc">
+              <i class="fas fa-map-pin"></i> 当你说出，你吃不完的我可以吃的时候，我就对你好感倍增。
+            </div>
+          </div>
+        </div>
+        <!-- 时间轴条目 3 -->
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fas fa-film"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">🎬 第一次一起看《疯狂动物城2》</div>
+            <div class="event-desc">
+              <i class="fas fa-music"></i> 好的关系从不是永远一致，而是明知不同，仍愿并肩。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fas fa-hiking"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">🧗 第一次一起户外爬山</div>
+            <div class="event-desc">
+              <i class="fas fa-tree"></i> 在我最需要你的时候，你一直都在，默默的照顾着我。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fa-duotone fa-solid fa-train"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">🚇 每日上下班的陪伴</div>
+            <div class="event-desc">
+              <i class="fa-solid fa-road"></i> 世界上最大的浪漫不过就是无论何时都有你在我身边，抬起头看到你时的安心。
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">🍚 一日三餐</div>
+            <div class="event-desc">
+              <i class="fa-solid fa-cheese"></i> 每日吃到老婆做的饭，都觉得幸福感满满。
+            </div>
+          </div>
+        </div>
+        <!-- 时间轴条目 4 -->
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fa-duotone fa-solid fa-champagne-glasses"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">💜 相识一个月</div>
+            <div class="event-desc">
+              <i class="fas fa-cake-candles"></i> 虽然我们相识很短，但是与你分开，却让我觉得度日如年。
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-left">
+            <div class="photo-frame">
+              <i class="fa-solid fa-infinity"></i>
+            </div>
+          </div>
+          <div class="timeline-right">
+            <div class="event-title">💜 一起一辈子</div>
+            <div class="event-desc">
+              <i class="fa-solid fa-venus-double"></i> 我坚信我们能通过时间的考验，在这条路上走的更远更久，坚定不移。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="custom-video-section">
+        <div class="custom-video-title">
+          <i class="fas fa-heart"></i> 我们的专属时光 <i class="fas fa-heart"></i>
+        </div>
+
+        <div class="custom-video-player">
+          <video controls preload="metadata" poster="./mylove.JPG">
+            <!-- 将 src 替换为您自己的视频文件路径，支持 mp4, webm, ogg -->
+            <source src="./love_v.mp4" type="video/mp4">
+            您的浏览器不支持视频播放，请升级或使用其他浏览器。
+          </video>
+        </div>
+        <p style="margin-top: 14px; color: #e6c3ff; font-size: 0.95rem; letter-spacing: 2px;">
+          <i class="fas fa-camera"></i> 把我们的故事，一帧一帧收藏
+        </p>
+      </div>
+      <!-- 6. 诗句区域（已替换为用户指定句子） -->
+      <div class="poem">
+        <i class="fas fa-quote-left" style="opacity: 0.7;"></i> 
+        别人用温柔形容你，我用你形容温柔
+        <i class="fas fa-quote-right" style="opacity: 0.7;"></i>
+      </div>
+
+      
+      <!-- 7. MV播放器 & 背景音乐控制（完全保留第一次） -->
+      <div class="mv-player-area">
+        <div class="mv-info">
+          <span style="font-weight: 600;">Can't stop love -- Darlin</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <audio id="bgMusic" loop preload="auto" autoplay playsinline>
+            <source src="./Darin - Can't Stop Love.mp3" type="audio/mpeg">
+          </audio>
+          <button id="musicToggleBtn" class="music-btn"><i id="musicIcon" class="fas fa-play"></i> 播放</button>
+        </div>
+      </div>
+
+      <!-- 8. 签名与日期 -->
+      <div class="signature">
+        Forever JY & WY
+      </div>
+      <div class="signature">
+        老婆，我爱你
+      </div>
+      <div class="date-stamp">
+        <i class="far fa-calendar-alt"></i> 2026 · 02 · 14
+      </div>
+
+    </div> <!-- glass-card 结束 -->
+  </div> <!-- content 结束 -->
+
+  <script>
+    (function() {
+      "use strict";
+
+      // ---------- 1. 漂浮紫色爱心（同第一次）----------
+      function createFloatingHearts() {
+        const container = document.getElementById('heartContainer');
+        if (!container) return;
+        const heartCount = 22;
+        for (let i = 0; i < heartCount; i++) {
+          const heart = document.createElement('i');
+          heart.className = 'fas fa-heart heart';
+          const size = Math.random() * 1.6 + 0.8;
+          heart.style.fontSize = size + 'rem';
+          heart.style.left = Math.random() * 100 + '%';
+          heart.style.animationDelay = Math.random() * 15 + 's';
+          heart.style.animationDuration = (Math.random() * 12 + 14) + 's';
+          heart.style.color = `rgba(${180 + Math.floor(Math.random() * 60)}, ${120 + Math.floor(Math.random() * 60)}, 255, ${0.3 + Math.random() * 0.3})`;
+          heart.style.textShadow = `0 0 20px rgba(200, 100, 255, 0.8)`;
+          container.appendChild(heart);
+        }
+      }
+      createFloatingHearts();
+      // 标志位：音乐是否被视频强制暂停
+    let musicPausedByVideo = false;
+    // 弹窗元素
+      const modal = document.getElementById('musicModal');
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const modalPlayBtn = document.getElementById('modalPlayBtn');
+
+      // ----- 关闭弹窗 -----
+      function closeModal() {
+        modal.classList.add('hidden');
+      }
+
+      // ----- 播放并关闭弹窗（用户手势触发）-----
+      function playAndClose() {
+        autoPlay();
+        closeModal();
+      }
+      // ----- 事件绑定 -----
+      // 1. 弹窗播放按钮
+        modalPlayBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        playAndClose();
+      });
+      // 2. 点击遮罩关闭弹窗（不播放）
+      modalOverlay.addEventListener('click', closeModal);
+
+      // 3. 关闭按钮
+      modalCloseBtn.addEventListener('click', closeModal);
+
+      // ---------- 2. 背景音乐控制（沿用第一次，稳定）----------
+      const bgMusic = document.getElementById('bgMusic');
+      const musicBtn = document.getElementById('musicToggleBtn');
+      const musicIcon = document.getElementById('musicIcon');
+      function autoPlay() {
+        if (bgMusic.paused) {
+            bgMusic.play()
+              .then(() => {
+                musicIcon.className = 'fas fa-pause';
+                musicBtn.classList.remove('paused');
+                // 更新按钮文字（保留图标）
+                const btnText = musicBtn.childNodes[1]; 
+                if (btnText) btnText.nodeValue = ' 暂停';
+              })
+              .catch(() => {
+                alert('轻触一下，让紫乐流淌 💜');
+              });
+          } else {
+            bgMusic.pause();
+            musicIcon.className = 'fas fa-play';
+            musicBtn.classList.add('paused');
+            const btnText = musicBtn.childNodes[1];
+            if (btnText) btnText.nodeValue = ' 播放';
+          }
+      }
+      if (musicBtn) {
+        musicBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+            musicPausedByVideo = false;
+          autoPlay()
+        });
+      }
+      const video = document.querySelector('.custom-video-player video');
+      // ---------- 视频播放：暂停背景音乐 ----------
+        video.addEventListener('play', function() {
+            if (!bgMusic.paused) {
+                // 如果音乐正在播放，暂停它，并记录是视频导致的暂停
+                autoPlay()
+                musicPausedByVideo = true;
+            }
+        });
+
+        // ---------- 视频暂停：恢复背景音乐 ----------
+        video.addEventListener('pause', function() {
+            // 仅当音乐是被视频强制暂停的，并且音乐当前是暂停状态，才恢复
+            if (musicPausedByVideo && bgMusic.paused) {
+                autoPlay()
+                musicPausedByVideo = false;
+            }
+        });
+        // ---------- 视频结束：同样恢复背景音乐 ----------
+        video.addEventListener('ended', function() {
+            if (musicPausedByVideo && bgMusic.paused) {
+                autoPlay()
+                musicPausedByVideo = false;
+            }
+        });
+      // ---------- 3. 打字机逐字效果 (新增/改动核心) ----------
+      const typingElement = document.getElementById('typingText');
+      // 打字文案（可随意修改）
+      const message = `\t遇见你之前，我以为自己只是刚刚结束一场漫长的跋涉，疲惫、失眠、不安，像一艘找不到港湾的船。遇见你之后，我才明白，原来所有的失去，都是为了给对的人让路。\n\t我们认识不过35天，短到别人可能会说“你们还不够了解彼此”。可我知道，有些人的灵魂相遇，一眼就够了。\n\t你说你谈了12次恋爱，我承认，很多时候我会偷偷在意，那些我没参与过的春天，那些别人牵过的手，那些同样毫无保留给过别人的温柔；但是后来我想通了，青春是用来成长的，而成长后的你，才刚好是我爱的样子。你把最好的自己，留给了最好的我们。我不该为过去吃醋，我该为现在感恩。\n\t你善良、自律、温柔得不像话。你会给我安排好每顿饭，会在深夜抱住失眠的我，让我第一次知道，原来被一个人坚定地爱着，是连梦都会变甜的事。你也倔强、强势，会生气、会推开人。可是你知道吗？那晚你喝了酒，低着头站在我家门口，像个犯错的孩子，那一刻我就知道，这个人，我要定了。\n\t你怕吵架，怕冷战，怕失去。而我曾经最擅长的，就是把情绪关进冰箱。但你教会了我，爱不是比谁更硬，而是愿意为对方变软。如果我再和你冷战，你一定要提醒我，我会尽我最大的努力调整自己的情绪。\n\t我不需要轰轰烈烈的誓言，也不需要戏剧性的浪漫。我只想和你一起过那种具体的、踏实的生活。我不希望你那么辛苦，那么累，我希望很多时候我们都能一起分担生活的重担，而我永远是你身后坚实的后盾，我在，我一直在。\n\t以前我觉得，五年长跑无疾而终，是命运的玩笑。现在我才懂，那是为了让我在刚刚好的时间，遇见刚刚好的你。\n\t谢谢你，从一段破碎的感情里走出来，还愿意信任爱。\n\t谢谢你，谈过12次恋爱，却把最后一次坚定地给了我。\n\t谢谢你那晚没有转身离开，让我有机会说出那句——留下来。\n\t我爱你。不是因为你完美，而是因为和你在一起，我不再害怕未来的任何样子。`;
+      let index = 0;
+
+      // 清空初始占位，准备逐字打印
+      if (typingElement) {
+        typingElement.innerHTML = ''; // 确保开始时为空
+
+        function typeWriter() {
+          if (index < message.length) {
+            typingElement.innerHTML += message.charAt(index);
+            index++;
+            setTimeout(typeWriter, 100); // 每字100ms
+          }
+        }
+        // 页面加载完成后开始打字
+        window.addEventListener('load', function() {
+          // 短暂延迟，让页面完全渲染
+          setTimeout(typeWriter, 300);
+        });
+      }
+    })();
+  </script>
+
+  <!-- 优雅降级 -->
+  <noscript>
+    <div style="position:fixed; top:0; background: #4a2a5a; color: white; padding: 20px;">您的浏览器未支持JavaScript，但浪漫依旧。</div>
+  </noscript>
+</body>
+</html>
